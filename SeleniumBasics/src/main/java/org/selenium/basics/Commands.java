@@ -103,6 +103,54 @@ public class Commands
 		WebElement des1=driver.findElement(By.partialLinkText("your destination"));
 		des1.click();
 	}
+	
+	
+	public void verifyIsSelected()
+	{
+		boolean isButtonSelected;
+		WebDriver driver=new ChromeDriver();
+		driver.get("https://demowebshop.tricentis.com/register");
+		driver.manage().window().maximize();
+		WebElement femaleradiobutton=driver.findElement(By.xpath("//input[@id='gender-female']"));
+		isButtonSelected=femaleradiobutton.isSelected();
+		System.out.println("Female radiobutton before selection:"+isButtonSelected);
+		femaleradiobutton.click();
+		isButtonSelected=femaleradiobutton.isSelected();
+		System.out.println("Female radiobutton after selection:"+isButtonSelected);;
+		driver.close();
+		
+	}
+	
+	public void verifyIsEnabled()
+	{
+		WebDriver driver=new ChromeDriver();
+		driver.get("https://demowebshop.tricentis.com/");
+		driver.manage().window().maximize();
+		WebElement subscribebutton=driver.findElement(By.xpath("//input[@id='newsletter-subscribe-button']"));
+		boolean isenabled=subscribebutton.isEnabled();
+		System.out.println("Subscribe button is enabled:"+isenabled);
+		driver.close();	
+		
+	}
+	
+	
+	public void verifyIsDisplayed()
+	{
+		
+		WebDriver driver=new ChromeDriver();
+		driver.get("https://demowebshop.tricentis.com/");
+		driver.manage().window().maximize();
+		WebElement votebutton=driver.findElement(By.xpath("//input[@class='button-2 vote-poll-button']"));
+		boolean isdispalyed=votebutton.isDisplayed();
+		System.out.println("vote button is dispalyed:"+isdispalyed);
+		
+	}
+	
+	
+	
+	
+	
+	
 	public static void main(String[] args)
 	{
 		Commands obj= new Commands();
@@ -112,7 +160,10 @@ public class Commands
 		//obj.verifyDestination();
 		//obj.VerifyPartialDestination();
 		//obj.Verifymercuryregisteration();
-		obj.verifyDemoWebShop();
+		//obj.verifyDemoWebShop();
+		obj.verifyIsSelected();
+		//obj.verifyIsEnabled();
+		//obj.verifyIsDisplayed();
 	}
 
 }
