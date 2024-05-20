@@ -1,4 +1,5 @@
 package org.selenium.basics;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -167,9 +168,75 @@ public class Commands
 		
 	}
 	
+	public void verifySimpleMethod()
+	{
+		WebDriver driver=new ChromeDriver();
+		driver.get("https://demoqa.com/alerts");
+		driver.manage().window().maximize();
+		WebElement alertclickmebtn=driver.findElement(By.xpath("//button[@id='alertButton']"));
+		alertclickmebtn.click();
+		Alert alert=driver.switchTo().alert();
+		alert.accept();
+		driver.close();
+	}
 	
 	
+	public void verifyConfirmationAlert()
+	{
+		WebDriver driver=new ChromeDriver();
+		driver.get("https://demoqa.com/alerts");
+		driver.manage().window().maximize();
+		WebElement promptclickmebtn=driver.findElement(By.xpath("//button[@id='confirmButton']"));
+		promptclickmebtn.click();
+		Alert alert=driver.switchTo().alert();
+		String confirmationalerttext=alert.getText();
+		System.out.println("Confirmation alert text is:"+confirmationalerttext);
+		alert.dismiss();
+		WebElement dismisstext=driver.findElement(By.xpath("//span[@id='promptResult']"));
+		String dtext=dismisstext.getText();
+		System.out.println("After selecting okay alert the text is:"+dtext);
+		
+	}
 	
+	public void verifyPromptAlert()
+	{
+		WebDriver driver=new ChromeDriver();
+		driver.get("https://demoqa.com/alerts");
+		driver.manage().window().maximize();	
+		WebElement promptalert=driver.findElement(By.xpath("//button[@id='promtButton']"));
+		promptalert.click();
+		Alert alert=driver.switchTo().alert();
+		String promptalerttext=alert.getText();
+		System.out.println("Prompt alert text is:"+promptalerttext);
+		alert.sendKeys("Vedha");
+		alert.accept();
+		WebElement accepttext=driver.findElement(By.xpath("//span[@id='confirmResult']"));
+		String acceptpromttext=accepttext.getText();
+		System.out.println("After selecting okay alert the text is:"+acceptpromttext);
+		
+				
+	}
+	
+	public void verifyCustomerForm()
+	{
+		WebDriver driver=new ChromeDriver();
+		driver.get("https://demo.guru99.com/test/delete_customer.php");
+		driver.manage().window().maximize();	
+		WebElement custid= driver.findElement(By.xpath("//input[@name='cusid']"));
+		custid.sendKeys("12345");
+		WebElement submitbtn=driver.findElement(By.xpath("//input[@name='submit']"));
+		submitbtn.click();
+		Alert alert=driver.switchTo().alert();
+		String alerttextbox=alert.getText();
+		System.out.println("Alerrt message is:"+alerttextbox);
+		alert.accept();
+		String alertdelete=alert.getText();
+		System.out.println("Alerrt message is:"+alertdelete);
+		alert.accept();
+		
+		
+		
+	}
 	
 	
 	public static void main(String[] args)
@@ -185,7 +252,12 @@ public class Commands
 		//obj.verifyIsSelected();
 		//obj.verifyIsEnabled();
 		//obj.verifyIsDisplayed();
-		obj.verifyValueFromDropdown();
+		//obj.verifyValueFromDropdown();
+		//obj.verifySimpleMethod();
+		//obj.verifyConfirmationAlert();
+		//obj.verifyPromptAlert();
+		obj.verifyCustomerForm();
+		
 	}
 
 }
