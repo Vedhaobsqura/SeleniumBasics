@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 public class Commands 
 {
@@ -235,10 +236,79 @@ public class Commands
 		alert.accept();
 		
 		
+	}
+	
+	public void verifyRightClick()
+	{
+		WebDriver driver=new ChromeDriver();
+		driver.get("https://demo.guru99.com/test/simple_context_menu.html");
+		driver.manage().window().maximize();	
+		WebElement rightclick= driver.findElement(By.xpath("//span[@class='context-menu-one btn btn-neutral']"));
+		Actions actions=new Actions(driver);
+		actions.contextClick(rightclick).build().perform();//build method is to perform chain of operations or actions  //perform execute the builda action
+	driver.close();
+	
+	}
+	
+	public void verifyDoubleClick()
+	{
+		WebDriver driver=new ChromeDriver();
+		driver.get("https://demo.guru99.com/test/simple_context_menu.html");
+		driver.manage().window().maximize();
+		WebElement doubleclick=driver.findElement(By.xpath("//button[text()='Double-Click Me To See Alert']"));
+		Actions actions=new Actions(driver);
+		actions.doubleClick(doubleclick).build().perform();
+		Alert alert=driver.switchTo().alert();
+		String alerttextbox=alert.getText();
+		System.out.println("Alert message is:"+alerttextbox);
+		alert.accept();
+		driver.close();
+	}
+	
+	
+	public void verifyDragandDrop()
+	{
+		WebDriver driver=new ChromeDriver();
+		driver.get("https://demoqa.com/droppable");
+		driver.manage().window().maximize();
+		WebElement drag=driver.findElement(By.xpath("//div[@id='draggable']"));
+		WebElement drop=driver.findElement(By.xpath("//div[@id='simpleDropContainer']//div[@class='drop-box ui-droppable']"));
+		Actions actions=new Actions(driver);
+		actions.dragAndDrop(drag, drop).build().perform();
+		driver.close();
 		
 	}
 	
 	
+	public void verifyDragandDropoffset()
+	{
+		WebDriver driver=new ChromeDriver();
+		driver.get("https://demoqa.com/dragabble");
+		driver.manage().window().maximize();
+		WebElement drag=driver.findElement(By.xpath("//div[@id='dragBox']"));
+		Actions actions=new Actions(driver);
+		actions.dragAndDropBy(drag,50,100).build().perform();
+		
+		
+	}
+	
+	public void verifyMouseHovering()
+	{
+		WebDriver driver=new ChromeDriver();
+		driver.get("https://demoqa.com/menu/");
+		driver.manage().window().maximize();	
+		WebElement mainitem2hover=driver.findElement(By.xpath("//a[text()='Main Item 2']"));
+		Actions actions=new Actions(driver);
+		actions.moveToElement(mainitem2hover).build().perform();
+		WebElement submenuhover=driver.findElement(By.xpath("//a[text()='SUB SUB LIST »']"));
+		Actions actions1=new Actions(driver);
+		actions1.contextClick(submenuhover).build().perform();
+		
+		
+		
+		
+		
+	}
 	public static void main(String[] args)
 	{
 		Commands obj= new Commands();
@@ -256,7 +326,12 @@ public class Commands
 		//obj.verifySimpleMethod();
 		//obj.verifyConfirmationAlert();
 		//obj.verifyPromptAlert();
-		obj.verifyCustomerForm();
+		//obj.verifyCustomerForm();
+		//obj.verifyRightClick();
+		//obj.verifyDoubleClick(); 
+		//obj.verifyDragandDrop();
+		//obj.verifyDragandDropoffset();
+		obj.verifyMouseHovering();
 		
 	}
 
