@@ -304,6 +304,47 @@ public class Commands
 		Actions actions1=new Actions(driver);
 		actions1.contextClick(submenuhover).build().perform();
 		
+		}
+	
+	
+	//src/main/resources-showin=systemexplorer-copy the file there-close-refresh the project
+	public void verifyFileUpload()
+	{
+		
+		WebDriver driver=new ChromeDriver();
+		driver.get("https://demo.guru99.com/test/upload/");
+		driver.manage().window().maximize();	
+		WebElement choosefile= driver.findElement(By.xpath("//input[@id='uploadfile_0']"));
+		choosefile.sendKeys("C:\\Users\\Vedha\\git\\SeleniumBasics\\SeleniumBasics\\src\\main\\resources\\Selenium Notes_Vedha.K.docx");
+		WebElement acceptfile= driver.findElement(By.xpath("//input[@id='terms']"));
+		acceptfile.click();
+		WebElement submitbtn= driver.findElement(By.xpath("//button[@id='submitbutton']"));
+		submitbtn.click();
+		driver.close();	
+	}
+	
+	
+	
+	
+	public void verifyMultipleDraggable()
+	{
+		WebDriver driver=new ChromeDriver();
+		driver.get("https://selenium.qabible.in/drag-drop.php");
+		driver.manage().window().maximize();
+		WebElement drag1=driver.findElement(By.xpath("//span[text()='Draggable n°1']"));
+		WebElement drag2=driver.findElement(By.xpath("//span[text()='Draggable n°2']"));
+		WebElement drag3=driver.findElement(By.xpath("//span[text()='Draggable n°3']"));
+		WebElement drag4=driver.findElement(By.xpath("//span[text()='Draggable n°4']"));
+		WebElement drop=driver.findElement(By.xpath("//div[@id='mydropzone']"));
+		Actions actions1=new Actions(driver);
+		actions1.dragAndDrop(drag1, drop).build().perform();
+		actions1.dragAndDrop(drag2, drop).build().perform();
+		actions1.dragAndDrop(drag3, drop).build().perform();
+		actions1.dragAndDrop(drag4, drop).build().perform();
+		
+		
+		
+		
 		
 		
 		
@@ -331,8 +372,9 @@ public class Commands
 		//obj.verifyDoubleClick(); 
 		//obj.verifyDragandDrop();
 		//obj.verifyDragandDropoffset();
-		obj.verifyMouseHovering();
-		
+		//obj.verifyMouseHovering();
+		//obj.verifyFileUpload();
+		obj.verifyMultipleDraggable();
 	}
 
 }
