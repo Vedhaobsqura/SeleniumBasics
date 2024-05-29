@@ -26,9 +26,12 @@ public class BrowserLaunch {
 			driver=new FirefoxDriver();
 		}
 		else
+		{
 			throw new RuntimeException("INVALID EXCEPTION");
-		driver.manage().window().maximize();
 	}
+		driver.manage().window().maximize();
+	
+}
 @BeforeMethod
 
 	public void setUp()
