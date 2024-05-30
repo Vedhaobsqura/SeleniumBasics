@@ -1,6 +1,11 @@
 package com.org.TESTNG;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -87,5 +92,42 @@ public class Commands extends BrowserLaunch
 		String Expected="Swag Labs";
 		Assert.assertEquals(Actual,Expected,"TITLE IS NOT MATCHING AS PER USER ENTRY");
 	}
+	@Test
+	public void verifyJavaScriptExecutorSendkeysandClick()
+	{
+		driver.get("https://demowebshop.tricentis.com");
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		js.executeScript("document.getElementById(\"newsletter-email\").value='vedha@gmail.com'");
+		js.executeScript("document.getElementById(\"newsletter-subscribe-button\").click()");
+	}
+	@Test
+	public void verifyScroll()
+	{
+		driver.get("https://demowebshop.tricentis.com");
+		JavascriptExecutor js1=(JavascriptExecutor)driver;
+		js1.executeScript("window.scrollTo(0,document.body.scrollHeight)");
+		
+	}
+	@Test
+	public void verifyLoginJavaScriptExecutor()
+	{
+		driver.get("https://demowebshop.tricentis.com/login");
+		JavascriptExecutor js2=(JavascriptExecutor)driver;
+		js2.executeScript("document.getElementById(\"Email\").value='Kottolathil@gmail.com'");
+		js2.executeScript("document.getElementById(\"Password\").value='demowebshop96#A'");
+		
+		
+	}
 	
+	@Test
+	public void verifyRobotClass() throws AWTException
+	{
+		driver.get("https://demowebshop.tricentis.com");
+		Robot robot=new Robot();
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_T);
+		robot.keyRelease(KeyEvent.VK_CONTROL);
+		robot.keyRelease(KeyEvent.VK_T);
+	
+	}
 }
