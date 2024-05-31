@@ -3,6 +3,7 @@ package com.org.TESTNG;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -130,4 +131,41 @@ public class Commands extends BrowserLaunch
 		robot.keyRelease(KeyEvent.VK_T);
 	
 	}
+	@Test
+	public void verifyDynmaicWebTable()
+	{
+		driver.get("https://money.rediff.com/indices/nse");
+		//show more click
+		WebElement showmore=driver.findElement(By.id("showMoreLess"));
+		showmore.click();
+		//nse indeces table
+		WebElement nsetable=driver.findElement(By.xpath("//table[@id='dataTable']"));
+		//to get all the data from nse indeces
+		//System.out.println(nsetable.getText());
+		//to get particular row
+		WebElement nseindecesonerow=driver.findElement(By.xpath("//table[@id='dataTable']/tbody/tr[2]"));
+		System.out.println(nseindecesonerow.getText());
+		//how much row is there
+		List<WebElement>rows=nsetable.findElements(By.tagName("tr"));
+		int rowcount=rows.size();
+		//in each row we have to find the columns for the value we needed
+		for(int i=0;i<rowcount;i++)
+		{
+			//inside row of column
+			List<WebElement>columns=rows.get(i).findElements(By.tagName("td"));
+			int columncount=columns.size();
+		
+		for(int j=0;j<columncount;j++)
+		{
+			String celltype=columns.get(j).getText();
+			if(celltype.equals("NIFTY NEXT 50"))
+			{
+			System.out.println("Previous close value is:"+columns.get(1).getText());	
+			}
+		}
+		}
+		
+		
+		
+		}
 }
