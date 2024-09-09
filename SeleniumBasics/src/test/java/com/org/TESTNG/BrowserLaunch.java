@@ -42,7 +42,7 @@ public class BrowserLaunch {
 @AfterMethod
 	public void closeBrowser()
 	{
-		driver.close();
+	//	driver.close();
 		
 	}
 	}

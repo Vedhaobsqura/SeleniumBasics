@@ -3,11 +3,15 @@ package com.org.TESTNG;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.time.Duration;
 import java.util.List;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -47,7 +51,7 @@ public class Commands extends BrowserLaunch
 	public void verifyGenderDetails()
 	{
 		driver.get("https://demowebshop.tricentis.com/register");
-		WebElement genderm=driver.findElement(By.xpath("//input[@id='gender-male']"));
+		WebElement genderm=driver.findElement(By.xpath("//input[@id='gender-female']"));
 		//genderm.click();   java.lang.AssertionError: Gender as Male is selected by the user expected [false] but found [true]
 		Boolean notselected=genderm.isSelected();
 		Assert.assertFalse(notselected, "Gender as Male is selected by the user");
@@ -168,4 +172,31 @@ public class Commands extends BrowserLaunch
 		
 		
 		}
+	
+	
+	
+	
+	@Test
+	public void verifyWaits() 
+	{
+	driver.get("https://demoqa.com/alerts");
+	//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+	WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(10));
+	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id='timerAlertButton']")));
+	WebElement alertclickme=driver.findElement(By.xpath("//button[@id='timerAlertButton']"));
+	alertclickme.click();
+	wait.until(ExpectedConditions.alertIsPresent());
+	Alert alert=driver.switchTo().alert();
+	alert.accept();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+}
 }
